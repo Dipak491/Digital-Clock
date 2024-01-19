@@ -5,66 +5,75 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Digital Clock</title>
     <style>
-        h1 {
-            font-weight: 700;
-            font-display: center;
-            position: relative;
-            text-align: center;
-            width: max-content;
-            background: green;
-            padding: 25px;
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
-        
-        h2 {
+
+        .container {
             text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        h2 {
             font-weight: 600;
+            font-size: 1.5rem;
+            color: #fff;
+            background: #e44d26;
             padding: 15px;
-            background: red;
-            width: max-content;
+            border-radius: 6px;
+            margin-bottom: 20px;
         }
     </style>
 
 </head>
 
 <body onload="showTime()">
+    <div class="container">
+        <h2>Digital Clock</h2>
+        <h1 id="clock"></h1>
+    </div>
 
-    <h2>
-        Digital clock
-    </h2>
-    <h1>
+    <script>
+        function showTime() {
+            var d = new Date();
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var s = d.getSeconds();
+            var session = "AM";
 
+            if (h > 12) {
+                h = h - 12;
+            }
 
-    </h1>
+            if (h >= 12) {
+                session = "PM";
+            }
 
-
+            h = h < 10 ? "0" + h : h;
+            s = s < 10 ? "0" + s : s;
+            m = m < 10 ? "0" + m : m;
+            var time = h + ":" + m + ":" + s + " " + session;
+            document.getElementById('clock').innerText = time;
+            setTimeout(showTime, 1000);
+        }
+    </script>
 </body>
-<script>
-    function showTime() {
-        var d = new Date();
-        var h = d.getHours();
-        var m = d.getMinutes();
-        var s = d.getSeconds();
-        var session = "AM";
-
-        if (h > 12) {
-            h = h - 12;
-
-        }
-
-        if (h => 12) {
-            session = "PM";
-        }
-
-        h = h < 10 ? "0" + h : h;
-        s = s < 10 ? "0" + s : s;
-        m = m < 10 ? "0" + m : m;
-        var time = h + ":" + m + ":" + s + " " + session;
-        document.getElementsByTagName('h1')[0].innerText = time;
-        setTimeout(showTime, 1000);
-    }
-</script>
 
 </html>
